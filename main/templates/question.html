@@ -1,0 +1,29 @@
+{% extends 'layouts/page.html' %}
+
+{% block content %}
+<div class="page question-page">
+
+  <form method="GET" action="" class="search-form">
+    <input type="text" name="query" placeholder="Search..." class="search-input" />
+    <input type="submit" value="Search" class="search-button" />
+  </form>
+  
+
+  <h2 class="question-title">{{question.title}}</h2>
+  <p class="question-body">{{question.body}}</p>
+  <span class="question-author">author : {{question.author.username}}</span>
+
+  
+  {% if user.is_authenticated %}
+  <form method="POST" action="" class="response-form">
+    {% csrf_token %}
+    <div class="fieldWrapper">
+      <label for="{{response_form.body.id_for_label}}">Your answer:</label>
+      {{response_form.body}}
+    </div>
+    <input type="submit" value="Send" class="submit-button" />
+  </form>
+  {% endif %}
+
+</div>
+{% endblock %}
